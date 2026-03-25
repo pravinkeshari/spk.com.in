@@ -61,6 +61,12 @@ trait PaymentGatewayTrait
             "foloosi" => [
                 "AED" => "United Arab Emirates Dirham"
             ],
+            "fonepay" => [
+                "NPR" => "Nepalese Rupee"
+            ],
+            "fonepay_qr" => [
+                "NPR" => "Nepalese Rupee"
+            ],
             "hubtel" => [
                 "GHS" => "Ghanaian Cedi"
             ],

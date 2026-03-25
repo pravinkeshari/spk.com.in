@@ -9,6 +9,7 @@ trait UpdateGatewayClass
     public function getProcessAllGatewayUpdates(): void
     {
         $this->ensureFonepayGatewayExists();
+        $this->ensureFonepayQrGatewayExists();
         $this->getInsertDataOfGatewayVersion(version: '1.1');
         $this->getInsertDataOfGatewayVersion(version: '1.2');
         $this->getInsertDataOfGatewayVersion(version: '1.3');
@@ -52,6 +53,44 @@ trait UpdateGatewayClass
                 'updated_at' => null,
                 'additional_data' => json_encode([
                     'gateway_title' => 'Fonepay',
+                    'gateway_image' => '',
+                ]),
+            ]);
+        }
+    }
+
+    public function ensureFonepayQrGatewayExists(): void
+    {
+        if (!Setting::where(['key_name' => 'fonepay_qr', 'settings_type' => 'payment_config'])->first()) {
+            Setting::create([
+                'key_name' => 'fonepay_qr',
+                'live_values' => json_encode([
+                    'gateway' => 'fonepay_qr',
+                    'mode' => 'test',
+                    'status' => 0,
+                    'merchant_code' => '',
+                    'secret_key' => '',
+                    'return_url' => '',
+                    'r1' => '',
+                    'r2' => 'N/A',
+                ]),
+                'test_values' => json_encode([
+                    'gateway' => 'fonepay_qr',
+                    'mode' => 'test',
+                    'status' => 0,
+                    'merchant_code' => '',
+                    'secret_key' => '',
+                    'return_url' => '',
+                    'r1' => '',
+                    'r2' => 'N/A',
+                ]),
+                'settings_type' => 'payment_config',
+                'mode' => 'test',
+                'is_active' => 0,
+                'created_at' => null,
+                'updated_at' => null,
+                'additional_data' => json_encode([
+                    'gateway_title' => 'Fonepay QR',
                     'gateway_image' => '',
                 ]),
             ]);

@@ -51,6 +51,7 @@ use Modules\Gateways\Http\Controllers\PayFastController;
 use Modules\Gateways\Http\Controllers\WorldPayController;
 use Modules\Gateways\Http\Controllers\SixcashPaymentController;
 use Modules\Gateways\Http\Controllers\FonepayController;
+use Modules\Gateways\Http\Controllers\FonepayQrController;
 use Modules\Gateways\Http\Controllers\PaymentConfigController;
 
 $is_published = 0;
@@ -181,6 +182,12 @@ if ($is_published) {
         Route::group(['prefix' => 'fonepay', 'as' => 'fonepay.'], function () {
             Route::any('pay', [FonepayController::class, 'payment'])->name('pay');
             Route::any('callback', [FonepayController::class, 'callback'])->name('callback')
+                ->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class]);
+        });
+        //FONEPAY QR
+        Route::group(['prefix' => 'fonepay-qr', 'as' => 'fonepay-qr.'], function () {
+            Route::any('pay', [FonepayQrController::class, 'payment'])->name('pay');
+            Route::any('callback', [FonepayQrController::class, 'callback'])->name('callback')
                 ->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class]);
         });
 

@@ -565,6 +565,8 @@ const GATEWAYS_PAYMENT_METHODS = [
     ['key' => 'instamojo', 'value' => 'Instamojo'],
     ['key' => 'phonepe', 'value' => 'PhonePe'],
     ['key' => 'cashfree', 'value' => 'Cashfree'],
+    ['key' => 'fonepay', 'value' => 'Fonepay'],
+    ['key' => 'fonepay_qr', 'value' => 'Fonepay QR'],
 ];
 
 //currencies

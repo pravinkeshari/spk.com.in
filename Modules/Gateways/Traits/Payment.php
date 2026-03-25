@@ -75,6 +75,7 @@ trait Payment
             'instamojo' => 'payment/instamojo/pay',
             'mercadopago_pix' => 'payment/mercadopago_pix/pay',
             'fonepay' => 'payment/fonepay/pay',
+            'fonepay_qr' => 'payment/fonepay-qr/pay',
         ];
         if (array_key_exists($payment->payment_method, $routes)) {
             return url("{$routes[$payment->payment_method]}/?payment_id={$payment->id}");

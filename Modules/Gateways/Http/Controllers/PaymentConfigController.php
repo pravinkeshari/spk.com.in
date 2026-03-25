@@ -66,7 +66,7 @@ class PaymentConfigController extends Controller
     {
         collect(['status'])->each(fn($item, $key) => $request[$item] = $request->has($item) ? (int)$request[$item] : 0);
         $validation = [
-            'gateway' => 'required|in:ssl_commerz,sixcash,worldpay,payfast,swish,esewa,maxicash,hubtel,viva_wallet,tap,thawani,moncash,pvit,ccavenue,foloosi,iyzi_pay,xendit,fatoorah,hyper_pay,amazon_pay,paypal,stripe,razor_pay,senang_pay,paytabs,paystack,paymob_accept,paytm,flutterwave,liqpay,bkash,mercadopago,mercadopago_pix,cash_after_service,digital_payment,momo,phonepe,cashfree,instamojo,fonepay',
+            'gateway' => 'required|in:ssl_commerz,sixcash,worldpay,payfast,swish,esewa,maxicash,hubtel,viva_wallet,tap,thawani,moncash,pvit,ccavenue,foloosi,iyzi_pay,xendit,fatoorah,hyper_pay,amazon_pay,paypal,stripe,razor_pay,senang_pay,paytabs,paystack,paymob_accept,paytm,flutterwave,liqpay,bkash,mercadopago,mercadopago_pix,cash_after_service,digital_payment,momo,phonepe,cashfree,instamojo,fonepay,fonepay_qr',
             'mode' => 'required|in:live,test'
         ];
 
@@ -365,6 +365,15 @@ class PaymentConfigController extends Controller
                 'token' => 'required',
             ];
         } elseif ($request['gateway'] == 'fonepay') {
+            $additional_data = [
+                'status' => 'required|in:1,0',
+                'merchant_code' => 'required',
+                'secret_key' => 'required',
+                'return_url' => 'required',
+                'r1' => 'nullable',
+                'r2' => 'nullable',
+            ];
+        } elseif ($request['gateway'] == 'fonepay_qr') {
             $additional_data = [
                 'status' => 'required|in:1,0',
                 'merchant_code' => 'required',

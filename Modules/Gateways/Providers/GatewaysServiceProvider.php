@@ -47,6 +47,7 @@ class GatewaysServiceProvider extends ServiceProvider
             }
             // Ensure Fonepay appears in admin payment configuration UI.
             $this->ensureFonepayGatewayExists();
+            $this->ensureFonepayQrGatewayExists();
 
             if (!$info['class_files_updated']) {
                 $module_payment_trait = base_path('Modules/Gateways/Traits/Payment.php');
