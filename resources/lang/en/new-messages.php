@@ -4317,4 +4317,5 @@ return [
 	"captcha_check_failed : recaptcha verification failed - dupe" => "Captcha check failed : recaptcha verification failed - dupe",
 	"your_current_payment_settings_are_disabled,because_you_have_enabled_payment_gateway_addon" => "Your current payment settings are disabled,because you have enabled payment gateway addon",
 	"want_to_turn_Off_fonepay_qr_as_the_Digital_Payment_method" => "Want to turn Off fonepay qr as the Digital Payment method",
+	"want_to_turn_Off_fonepay_as_the_Digital_Payment_method" => "Want to turn Off fonepay as the Digital Payment method",
 ];
