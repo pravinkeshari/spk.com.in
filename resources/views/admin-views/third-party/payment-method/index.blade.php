@@ -92,7 +92,12 @@
                     @foreach($paymentGatewaysList as $key=> $gateway)
                         <div class="col-md-6 payment-gateway-cards">
                             <div class="card shadow-2">
-                                @php($mode = $gateway->live_values['mode'] ?? '')
+                                @php($gatewayLiveValues = $gateway['live_values'] ?? [])
+                                @if(is_string($gatewayLiveValues))
+                                    @php($decodedGatewayLiveValues = json_decode($gatewayLiveValues, true))
+                                    @php($gatewayLiveValues = is_array($decodedGatewayLiveValues) ? $decodedGatewayLiveValues : [])
+                                @endif
+                                @php($mode = $gatewayLiveValues['mode'] ?? '')
                                 <div class="card-body d-flex justify-content-between align-items-center">
                                     <h4 class="text-capitalize mb-0 d-flex gap-2 align-items-center">
                                         {{ str_replace('_',' ',$gateway->key_name) }}
@@ -102,7 +107,7 @@
 
                                         <?php
                                             $gatewayReadyToUse = 1;
-                                            foreach ($gateway['live_values'] as $liveValues) {
+                                            foreach ($gatewayLiveValues as $liveValues) {
                                                 if (empty($liveValues) && $liveValues != 0) {
                                                     $gatewayReadyToUse = 0;
                                                 }
