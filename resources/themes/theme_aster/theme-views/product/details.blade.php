@@ -19,7 +19,7 @@
                                     <div class="col-lg-5 col-md-4">
                                         <div class="pd-img-wrap position-relative h-100">
                                             <div class="w-100 d-flex justify-content-center">
-                                                <div class="swiper-container quickviewSlider2 active-border border rounded aspect--1 inline-size-100 border--gray">
+                                                <div class="swiper swiper-container quickviewSlider2 active-border border rounded aspect--1 inline-size-100 border--gray">
                                                     <div class="product__actions d-flex align-items-start gap-12">
                                                         @if($product->product_type == "physical")
                                                             <a href="javascript:" style="--size: 35px;" class="border text-warning bg-white" data-bs-toggle="tooltip" title="{{ translate('Physical_Product') }}" data-placement="left">
@@ -171,7 +171,7 @@
                                                 </div>
                                             </div>
                                             <div class="mt-2 user-select-none">
-                                                <div class="quickviewSliderThumb2 swiper-container active-border position-relative ">
+                                                <div class="swiper quickviewSliderThumb2 swiper-container active-border position-relative ">
                                                     @if($product->images!=null && json_decode($product->images)>0)
                                                         <div
                                                             class="swiper-wrapper auto-item-width justify-content-start border--gray width--4rem">
