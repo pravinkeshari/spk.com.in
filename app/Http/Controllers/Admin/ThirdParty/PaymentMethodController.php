@@ -62,7 +62,12 @@ class PaymentMethodController extends BaseController
         });
 
         $paymentGatewaysList = $paymentGatewaysList->sortBy(function ($item) {
-            return count($item['live_values']);
+            $values = $item['live_values'] ?? [];
+            if (is_string($values)) {
+                $decoded = json_decode($values, true);
+                $values = is_array($decoded) ? $decoded : [];
+            }
+            return count($values);
         })->values()->all();
 
         $paymentUrl = $this->settingService->getVacationData(type: 'payment_setup');
