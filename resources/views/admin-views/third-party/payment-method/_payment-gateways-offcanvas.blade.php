@@ -124,7 +124,12 @@
                                         <div class='p-2'></div>
                                         <div>{{ translate('when_select_live_option') }} : {{ translate('during_use_this_from_website_or_app_use_fake_required_data_to_test_payment_gateway_work_properly_or_not') }}</div>"></i>
                             </label>
-                            @php($mode = $gateway->live_values['mode'])
+                            @php($gatewayLiveValues = $gateway['live_values'] ?? [])
+                            @if(is_string($gatewayLiveValues))
+                                @php($decodedGatewayLiveValues = json_decode($gatewayLiveValues, true))
+                                @php($gatewayLiveValues = is_array($decodedGatewayLiveValues) ? $decodedGatewayLiveValues : [])
+                            @endif
+                            @php($mode = $gatewayLiveValues['mode'] ?? '')
                             <div class="min-h-40 d-flex align-items-center gap-4 border rounded mb-2 px-3 py-1">
                                 <div class="form-check d-flex gap-1">
                                     <input class="form-check-input radio--input" type="radio" name="mode"
@@ -148,7 +153,7 @@
                         @else
                             @php($skip=['gateway','mode','status', 'supported_country'])
                         @endif
-                        @foreach($gateway->live_values as $gatewayKey => $value)
+                        @foreach($gatewayLiveValues as $gatewayKey => $value)
                             @if(!in_array($gatewayKey , $skip))
                                 <div class="mb-4">
                                     <label for="gateway-key-{{ $gateway->key_name }}-{{ $gatewayKey }}" class="form-label">
@@ -164,7 +169,7 @@
                             @endif
                         @endforeach
 
-                        @php($supportedCountry = $gateway->live_values)
+                        @php($supportedCountry = $gatewayLiveValues)
                         @if (isset($supportedCountry['supported_country']))
                             @php($supportedCountry = $supportedCountry['supported_country'])
                             <label for="{{ $gateway->key_name }}-title" class="form-label">
