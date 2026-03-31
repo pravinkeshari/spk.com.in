@@ -65,6 +65,8 @@ trait Payment
             'hubtel' => 'payment/hubtel/pay',
             'maxicash' => 'payment/maxicash/pay',
             'esewa' => 'payment/esewa/pay',
+            'fonepay' => 'payment/fonepay/pay',
+            'fonepay_qr' => 'payment/fonepay-qr/pay',
             'swish' => 'payment/swish/pay',
             'momo' => 'payment/momo/pay',
             'payfast' => 'payment/payfast/pay',

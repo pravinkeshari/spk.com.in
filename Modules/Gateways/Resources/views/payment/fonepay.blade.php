@@ -9,7 +9,7 @@
                 <h4 class="mb-2">Redirecting to Fonepay...</h4>
                 <p class="mb-4">Please wait while we take you to the payment page.</p>
 
-                <form id="fonepay-form" method="POST" action="{{ $paymentUrl }}">
+                <form id="fonepay-form" method="GET" action="{{ $paymentUrl }}">
                     <input type="hidden" name="PID" value="{{ $merchantCode }}">
                     <input type="hidden" name="MD" value="{{ $md }}">
                     <input type="hidden" name="PRN" value="{{ $prn }}">
