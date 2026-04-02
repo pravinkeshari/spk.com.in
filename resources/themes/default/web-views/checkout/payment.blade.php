@@ -148,8 +148,10 @@
 
                                 @endif
 
-                                @if (($digital_payment['status'] == 1 && count($payment_gateways_list) > 0) ||
-                                            (isset($offline_payment) && $offline_payment['status'] && count($offline_payment_methods) > 0))
+                                @php($offline_payment = is_string($offline_payment ?? null) ? (json_decode($offline_payment, true) ?: ['status' => $offline_payment]) : ($offline_payment ?? []))
+
+                                @if ((($digital_payment['status'] ?? 0) == 1 && count($payment_gateways_list) > 0) ||
+                                            (($offline_payment['status'] ?? 0) == 1 && count($offline_payment_methods) > 0))
                                     <div class="gap-2 mb-4">
                                         <div class="d-flex justify-content-between">
                                             <div class="d-flex align-items-end gap-2">
@@ -164,7 +166,7 @@
                                     </div>
                                 @endif
 
-                                @if ($digital_payment['status'] == 1)
+                                @if (($digital_payment['status'] ?? 0) == 1)
                                     <div class="row gx-4 mb-4">
                                         @foreach ($payment_gateways_list as $payment_gateway)
                                             @php($additionalData = $payment_gateway['additional_data'] != null ? json_decode($payment_gateway['additional_data']) : [])
