@@ -4319,4 +4319,5 @@ return [
 	"want_to_turn_Off_fonepay_qr_as_the_Digital_Payment_method" => "Want to turn Off fonepay qr as the Digital Payment method",
 	"want_to_turn_Off_fonepay_as_the_Digital_Payment_method" => "Want to turn Off fonepay as the Digital Payment method",
 	"Payment" => "Payment",
+	"want_to_turn_Off_esewa_as_the_Digital_Payment_method" => "Want to turn Off esewa as the Digital Payment method",
 ];
