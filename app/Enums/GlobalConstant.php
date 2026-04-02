@@ -1179,6 +1179,7 @@ enum GlobalConstant
         'paytm',
         'paytabs',
         'liqpay',
+        'esewa',
         'mercadopago',
         'bkash',
         'fonepay',
