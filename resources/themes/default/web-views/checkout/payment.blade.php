@@ -47,9 +47,12 @@
                                     </div>
                                 @endif
 
+                                @php($digital_payment = is_string($digital_payment) ? (json_decode($digital_payment, true) ?: ['status' => $digital_payment]) : $digital_payment)
+                                @php($cash_on_delivery = is_string($cash_on_delivery) ? (json_decode($cash_on_delivery, true) ?: ['status' => $cash_on_delivery]) : $cash_on_delivery)
+
                                 @if (
-                                    ($cashOnDeliveryBtnShow && $cash_on_delivery['status']) ||
-                                        $digital_payment['status'] == 1 ||
+                                    ($cashOnDeliveryBtnShow && ($cash_on_delivery['status'] ?? 0)) ||
+                                        (($digital_payment['status'] ?? 0) == 1) ||
                                         (auth('customer')->check() && $wallet_status == 1))
                                     @if (($cashOnDeliveryBtnShow && $cash_on_delivery['status']) || (auth('customer')->check() && $wallet_status == 1))
                                         <p class="text-capitalize mt-2">
@@ -165,6 +168,16 @@
                                     <div class="row gx-4 mb-4">
                                         @foreach ($payment_gateways_list as $payment_gateway)
                                             @php($additionalData = $payment_gateway['additional_data'] != null ? json_decode($payment_gateway['additional_data']) : [])
+                                            @php($gatewayLiveValues = $payment_gateway['live_values'] ?? [])
+                                            @if(is_string($gatewayLiveValues))
+                                                @php($decodedGatewayLiveValues = json_decode($gatewayLiveValues, true))
+                                                @php($gatewayLiveValues = is_array($decodedGatewayLiveValues) ? $decodedGatewayLiveValues : [])
+                                            @endif
+                                            @php($gatewayTestValues = $payment_gateway['test_values'] ?? [])
+                                            @if(is_string($gatewayTestValues))
+                                                @php($decodedGatewayTestValues = json_decode($gatewayTestValues, true))
+                                                @php($gatewayTestValues = is_array($decodedGatewayTestValues) ? $decodedGatewayTestValues : [])
+                                            @endif
                                             <?php
                                                 $gatewayImgPath = dynamicAsset(path: 'public/assets/back-end/img/modal/payment-methods/' . $payment_gateway->key_name . '.png');
                                                 if ($additionalData != null && $additionalData?->gateway_image && file_exists(base_path('storage/app/public/payment_modules/gateway_image/' . $additionalData->gateway_image))) {
@@ -186,12 +199,12 @@
                                                         value="{{ $payment_gateway->key_name }}">
                                                     <input type="hidden" name="payment_platform" value="web">
 
-                                                    @if ($payment_gateway->mode == 'live' && isset($payment_gateway->live_values['callback_url']))
+                                                    @if ($payment_gateway->mode == 'live' && isset($gatewayLiveValues['callback_url']))
                                                         <input type="hidden" name="callback"
-                                                            value="{{ $payment_gateway->live_values['callback_url'] }}">
-                                                    @elseif ($payment_gateway->mode == 'test' && isset($payment_gateway->test_values['callback_url']))
+                                                            value="{{ $gatewayLiveValues['callback_url'] }}">
+                                                    @elseif ($payment_gateway->mode == 'test' && isset($gatewayTestValues['callback_url']))
                                                         <input type="hidden" name="callback"
-                                                            value="{{ $payment_gateway->test_values['callback_url'] }}">
+                                                            value="{{ $gatewayTestValues['callback_url'] }}">
                                                     @else
                                                         <input type="hidden" name="callback" value="">
                                                     @endif
