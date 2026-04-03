@@ -86,7 +86,7 @@ class EsewaPaymentController extends Controller
     {
         $config_val = $this->config_values;
         $config_mode = $this->config_mode;
-        $url = $config_mode == 'test' ? "https://uat.esewa.com.np/api/epay/transaction/status/" : "https://esewa.com.np/api/epay/transaction/status/";
+        $url = $config_mode == 'test' ? "https://rc-epay.esewa.com.np/api/epay/transaction/status/" : "https://epay.esewa.com.np/api/epay/transaction/status/";
 
         $payment_data = $this->payment::where(['transaction_id' => $payment_id])->first();
         if (!isset($payment_data)) {
