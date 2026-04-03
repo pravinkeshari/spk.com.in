@@ -307,6 +307,24 @@ class PaymentMethodUpdateRequest extends FormRequest
                 'status' => 'required|in:1,0',
                 'api_key' => 'required',
             ];
+        } elseif ($this['gateway'] == 'fonepay') {
+            $additionalDataRules = [
+                'status' => 'required|in:1,0',
+                'merchant_code' => 'required',
+                'secret_key' => 'required',
+                'return_url' => 'required',
+                'r1' => 'nullable',
+                'r2' => 'nullable',
+            ];
+        } elseif ($this['gateway'] == 'fonepay_qr') {
+            $additionalDataRules = [
+                'status' => 'required|in:1,0',
+                'merchant_code' => 'required',
+                'secret_key' => 'required',
+                'return_url' => 'required',
+                'r1' => 'nullable',
+                'r2' => 'nullable',
+            ];
         }
 
         return $additionalDataRules;

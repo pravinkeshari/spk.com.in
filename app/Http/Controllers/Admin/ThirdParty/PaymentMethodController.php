@@ -160,10 +160,30 @@ class PaymentMethodController extends BaseController
             }
         }
 
+        $validated = $request->validated();
+        $existingLive = $settings?->live_values ?? [];
+        if (is_string($existingLive)) {
+            $decoded = json_decode($existingLive, true);
+            $existingLive = is_array($decoded) ? $decoded : [];
+        } elseif (!is_array($existingLive)) {
+            $existingLive = [];
+        }
+
+        $existingTest = $settings?->test_values ?? [];
+        if (is_string($existingTest)) {
+            $decoded = json_decode($existingTest, true);
+            $existingTest = is_array($decoded) ? $decoded : [];
+        } elseif (!is_array($existingTest)) {
+            $existingTest = [];
+        }
+
+        $liveValues = array_merge($existingLive, $validated);
+        $testValues = array_merge($existingTest, $validated);
+
         $this->settingRepo->updateOrInsert(params: ['key_name' => $request['gateway'], 'settings_type' => 'payment_config'], data: [
             'key_name' => $request['gateway'],
-            'live_values' => $request->validated(),
-            'test_values' => $request->validated(),
+            'live_values' => $liveValues,
+            'test_values' => $testValues,
             'settings_type' => 'payment_config',
             'mode' => $request['mode'],
             'is_active' => $status,
