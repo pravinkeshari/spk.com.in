@@ -13,9 +13,9 @@
 
 <body>
 <form action="{{ $config_mode == 'test' ? 'https://rc-epay.esewa.com.np/api/epay/main/v2/form' : 'https://epay.esewa.com.np/api/epay/main/v2/form' }}" method="POST"  name="redirect">
-    <input type="hidden" id="amount" name="amount" value="{{ $data->payment_amount }}" required>
+    <input type="hidden" id="amount" name="amount" value="{{ number_format((float)$data->payment_amount, 2, '.', '') }}" required>
     <input type="hidden" id="tax_amount" name="tax_amount" value ="0" required>
-    <input type="hidden" id="total_amount" name="total_amount" value="{{ $data->payment_amount }}" required>
+    <input type="hidden" id="total_amount" name="total_amount" value="{{ number_format((float)$data->payment_amount, 2, '.', '') }}" required>
     <input type="hidden" id="transaction_uuid" name="transaction_uuid" value="{{ $uuid }}">
     <input type="hidden" id="product_code" name="product_code" value ="{{ $config_val->merchantCode }}" required>
     <input type="hidden" id="product_service_charge" name="product_service_charge" value="0" required>

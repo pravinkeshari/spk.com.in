@@ -66,7 +66,7 @@ class EsewaPaymentController extends Controller
 
         $code = $config_val->merchantCode;
         $key = $config_val->merchant_secret;
-        $amount = $data->payment_amount;
+        $amount = number_format((float)$data->payment_amount, 2, '.', '');
         $message = "total_amount=$amount,transaction_uuid=$uuid,product_code=$code";
         $s = hash_hmac('sha256', $message, $key, true);
         $signature = base64_encode($s);
