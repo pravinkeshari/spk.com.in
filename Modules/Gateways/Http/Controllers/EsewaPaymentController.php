@@ -82,7 +82,7 @@ class EsewaPaymentController extends Controller
             'message' => $message,
         ]);
 
-        return view('Gateways::payment.esewa', compact('data', 'config_val', 'config_mode','signature','uuid'));
+        return view('Gateways::payment.esewa', compact('data', 'config_val', 'config_mode','signature','uuid','amount'));
     }
 
     public function verify(Request $request, $payment_id): Application|JsonResponse|int|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
