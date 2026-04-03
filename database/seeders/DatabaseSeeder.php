@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             AdminRoleTable::class,
             AdminTable::class,
             SellerTableSeeder::class,
+            GatewayAddonSettingsSeeder::class,
         ]);
     }
 }

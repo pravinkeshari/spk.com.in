@@ -4320,4 +4320,8 @@ return [
 	"want_to_turn_Off_fonepay_as_the_Digital_Payment_method" => "Want to turn Off fonepay as the Digital Payment method",
 	"Payment" => "Payment",
 	"want_to_turn_Off_esewa_as_the_Digital_Payment_method" => "Want to turn Off esewa as the Digital Payment method",
+	"we_are_currently_undergoing_maintenance" => "We are currently undergoing maintenance",
+	"All_Systems" => "All Systems",
+	"no_currency_found" => "No currency found",
+	"the_gateway_title_field_is_required" => "The gateway title field is required",
 ];
