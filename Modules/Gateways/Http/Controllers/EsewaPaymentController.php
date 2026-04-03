@@ -71,6 +71,14 @@ class EsewaPaymentController extends Controller
         $s = hash_hmac('sha256', $message, $key, true);
         $signature = base64_encode($s);
 
+        \Log::info('esewa-debug', [
+            'payment_id' => $data->id,
+            'uuid' => $uuid,
+            'amount' => $amount,
+            'code' => $code,
+            'signature' => $signature,
+        ]);
+
         return view('Gateways::payment.esewa', compact('data', 'config_val', 'config_mode','signature','uuid'));
     }
 
