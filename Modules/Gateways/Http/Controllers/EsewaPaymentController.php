@@ -77,6 +77,9 @@ class EsewaPaymentController extends Controller
             'amount' => $amount,
             'code' => $code,
             'signature' => $signature,
+            'config_mode' => $config_mode,
+            'endpoint' => $config_mode == 'test' ? 'https://rc-epay.esewa.com.np/api/epay/main/v2/form' : 'https://epay.esewa.com.np/api/epay/main/v2/form',
+            'message' => $message,
         ]);
 
         return view('Gateways::payment.esewa', compact('data', 'config_val', 'config_mode','signature','uuid'));
