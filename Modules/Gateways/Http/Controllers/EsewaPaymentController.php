@@ -6,6 +6,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -41,7 +42,7 @@ class EsewaPaymentController extends Controller
         $this->payment = $payment;
     }
 
-    public function payment(Request $req): View|Application|Factory|JsonResponse|\Illuminate\Contracts\Foundation\Application
+    public function payment(Request $req): View|Application|Factory|JsonResponse|Response|\Illuminate\Contracts\Foundation\Application
     {
         $validator = Validator::make($req->all(), [
             'payment_id' => 'required|uuid'
