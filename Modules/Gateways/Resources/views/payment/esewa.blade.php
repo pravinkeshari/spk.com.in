@@ -39,6 +39,11 @@ endpoint={{ $config_mode == 'test' ? 'https://rc-epay.esewa.com.np/api/epay/main
 </form>
 
 <script>
+    const form = document.forms['redirect'];
+    const data = new FormData(form);
+    const payload = {};
+    for (const [k, v] of data.entries()) payload[k] = v;
+    console.log('eSewa payload', payload);
     document.redirect.submit();
 </script>
 </body>
