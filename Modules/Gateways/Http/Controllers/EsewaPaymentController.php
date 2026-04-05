@@ -65,10 +65,10 @@ class EsewaPaymentController extends Controller
         $data->transaction_id = $uuid;
         $data->save();
 
-        $code = $config_val->merchantCode;
-        $key = $config_val->merchant_secret;
-        // $code = "EPAYTEST";
-        // $key = "8gBm/&EnhH.1/q";
+        // $code = $config_val->merchantCode;
+        // $key = $config_val->merchant_secret;
+        $code = "EPAYTEST";
+        $key = "8gBm/&EnhH.1/q";
         \Log::info('eSewa Payment Debug', [
         
             'code' => $code,
