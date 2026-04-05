@@ -12,16 +12,6 @@
 </head>
 
 <body>
-<pre style="padding:12px;background:#f6f6f6;border:1px solid #ddd;white-space:pre-wrap;">
-amount={{ $amount }}
-total_amount={{ $amount }}
-transaction_uuid={{ $uuid }}
-product_code={{ $config_val->merchantCode ?? '' }}
-signature={{ $signature }}
-success_url={{ route('esewa.verify', ['payment_id' => $uuid]) }}
-failure_url={{ route('esewa.verify', ['payment_id' => $uuid]) }}
-endpoint={{ $config_mode == 'test' ? 'https://rc-epay.esewa.com.np/api/epay/main/v2/form' : 'https://epay.esewa.com.np/api/epay/main/v2/form' }}
-</pre>
 <form action="{{ $config_mode == 'test' ? 'https://rc-epay.esewa.com.np/api/epay/main/v2/form' : 'https://epay.esewa.com.np/api/epay/main/v2/form' }}" method="POST"  name="redirect">
     <input type="hidden" id="amount" name="amount" value="{{ $amount }}" required>
     <input type="hidden" id="tax_amount" name="tax_amount" value ="0" required>
@@ -39,11 +29,6 @@ endpoint={{ $config_mode == 'test' ? 'https://rc-epay.esewa.com.np/api/epay/main
 </form>
 
 <script>
-    const form = document.forms['redirect'];
-    const data = new FormData(form);
-    const payload = {};
-    for (const [k, v] of data.entries()) payload[k] = v;
-    console.log('eSewa payload', payload);
     document.redirect.submit();
 </script>
 </body>

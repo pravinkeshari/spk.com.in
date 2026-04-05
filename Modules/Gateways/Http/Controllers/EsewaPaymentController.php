@@ -67,31 +67,14 @@ class EsewaPaymentController extends Controller
 
         $code = $config_val->merchantCode;
         $key = $config_val->merchant_secret;
-        // $code = "EPAYTEST";
-        // $key = "8gBm/&EnhH.1/q";
-        \Log::info('eSewa Payment Debug', [
-        
-            'code' => $code,
-            'key' => $key,
-        ]);
 
-        // console_log($);
+
 
         $amount = number_format((float)$data->payment_amount, 2, '.', '');
         $message = "total_amount=$amount,transaction_uuid=$uuid,product_code=$code";
         $s = hash_hmac('sha256', $message, $key, true);
         $signature = base64_encode($s);
 
-        \Log::info('esewa-debug', [
-            'payment_id' => $data->id,
-            'uuid' => $uuid,
-            'amount' => $amount,
-            'code' => $code,
-            'signature' => $signature,
-            'config_mode' => $config_mode,
-            'endpoint' => $config_mode == 'test' ? 'https://rc-epay.esewa.com.np/api/epay/main/v2/form' : 'https://epay.esewa.com.np/api/epay/main/v2/form',
-            'message' => $message,
-        ]);
 
         return response()
             ->view('Gateways::payment.esewa', compact('data', 'config_val', 'config_mode','signature','uuid','amount'))
